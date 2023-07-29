@@ -1,45 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "transparent-black": "rgb(0, 0, 0, 0.8)",
+            },
+            backgroundImage: {
+              "main-image":
+                "linear-gradient(rgba(29,47,87, 0.45), rgba(0, 0, 0, 1))",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+    </style>
+    <title>Credit card Fraud Detection Web App | Results Page</title>
   </head>
-  <body>
-    <header>
-      <div class="container" style="text-align: center;">
-        <div id="brandname">
-          <h1 style="color: black">
-          Credit Card Fraud Detection Results
-          </h1>
+  <body class="w-full h-screen p-0 h-0">
+    <div class="w-full h-full">
+      <div
+        class="absolute w-full h-full inset-0 bg-main-image flex justify-center items-center gap-4"
+      >
+        <div class="max-w-[600px] bg-transparent-black backdrop-blur-sm p-6 rounded-lg space-y-4">
+          <div class="text-center w-fit space-y-2">
+            <h1 class="text-white font-bold text-4xl">Credit Card Fraud Detection Results</h1>
+            <!-- <p class="text-white font-medium text-sm w-[400px] text-center mx-auto">Enter the 10 feature values in the correct order seperated by a comma (",") in textbox below</p> -->
+          </div>
+          <div class="text-center w-fit mx-auto space-y-8">
+            <div class="">
+              {% if prediction == 0 %}
+              <h1 class="font-medium" style="color: green; text-align: center">
+                This transaction is not a fraudulent transaction.
+              </h1>
+              {% elif prediction == 1 %}
+              <h2 class="font-medium" style="color: red">This transaction is a fraudulent transaction.</h2>
+              {% endif %}
+            </div>
+            <div>
+              <a href="/" class="px-3 py-2 bg-white rounded-md w-fit h-fit mx-auto block font-bold cursor-pointer hover:bg-[#999]" >
+                <p>
+                  Try again
+                </p>
+              </a>
+            </div>
+          </div>
         </div>
-        <!-- <h2><p style="text-align: center">Detection</p></h2> -->
       </div>
-    </header>
-    <h2 style="color: blueviolet; text-align: center;">
-      <b>Validation Completed.</b>
-    </h2>
-    <div class="results">
-      {% if prediction == 0 %}
-      <h1 style="color: green; text-align: center;">
-          According to our model, the provided transaction is NOT a Fraudulent transaction.
-      </h1>
-      {% elif prediction == 1 %}
-      <h2 style="color: red">
-          According to our model, this transaction is a Fraudulent transaction.
-      </h2>
-      {% endif %}
+      <img
+        src="{{bg_image}}"
+        class="w-full h-full object-cover object-center bg-main-image"
+        alt=""
+      />
     </div>
-
-    <a href="/">
-      <button class="btn-info" style="border: 1px solid green;">Re-evaluate</button>
-    </a>
   </body>
 </html>

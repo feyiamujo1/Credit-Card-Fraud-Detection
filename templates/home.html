@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Credit Card Fraud Detection Web App</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "transparent-black": "rgb(0, 0, 0, 0.8)",
+            },
+            backgroundImage: {
+              "main-image":
+                "linear-gradient(rgba(29,47,87, 0.45), rgba(0, 0, 0, 1))",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+    </style>
+    <title>Credit card Fraud Detection Web App | Home Page</title>
   </head>
-  <body style="background-color: black;">
-    <header>
-      <div class="container">
-        <h1>
-          <p style="text-align: center; color:white;">Credit Card Fraud Detection</p>
-        </h1>
-      </div>
-    </header>
-    <div class="ml-container">
-      <p style="text-align: center; color: white;">
-        Enter the 30 feature values in the cell below (in order):
-      </p>
-
-      <form action="{{ url_for('predict')}}" method="POST">
-        <!-- <input type="text" name="comment"/> -->
-        <div class="justify"> 
-          <textarea name="message" rows="8" cols="50"></textarea>
+  <body class="w-full h-screen p-0 h-0">
+    <div class="w-full h-full">
+      <div
+        class="absolute w-full h-full inset-0 bg-main-image flex justify-center items-center gap-4"
+      >
+        <div class="max-w-[600px] bg-transparent-black backdrop-blur-sm p-6 rounded-lg space-y-4">
+          <div class="text-center w-fit space-y-2">
+            <h1 class="text-white font-bold text-4xl">Credit Card Fraud Detection</h1>
+            <p class="text-white font-medium text-base max-w-[400px] text-center mx-auto">Enter the 10 feature values in the correct order seperating each by a comma (",")</p>
+          </div>
+          <div class="flex justify-center ">
+            <form action="{{ url_for('predict')}}" method="POST" class="space-y-6">
+                <textarea class="rounded-md caret-black focus:caret-black active:caret-black block p-2" name="message" rows="8" cols="50"></textarea>
+                <input class="px-3 py-2 bg-white rounded-md w-fit h-fit mx-auto block font-bold cursor-pointer hover:bg-[#999]" type="submit" value="Predict Transactions" />
+            </form>
+          </div>
         </div>
-        <br/>
-
-        <input type="submit" class="btn-info" value="Predict fradulent transactions" />
-      </form>
-    </div>
-    <br><br><br>
-    <div class="container">
-      <h1>
-        <p style="text-align: center; color:white;">Adediran Stephen Olugbemi</p>
-        <p style="text-align: center; color:white;">Redeemers University</p>
-        
-      </h1>
+      </div>
+      <img
+        src="{{bg_image}}"
+        class="w-full h-full object-cover object-center bg-main-image"
+        alt=""
+      />
     </div>
   </body>
 </html>
